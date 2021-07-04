@@ -10,25 +10,28 @@ Kelas  : A11.4415
  */
 
 class fcfs extends JFrame implements ActionListener {
-    JButton jb[] = new JButton[3];
-    JTextField jt1[], jt2[];
-    JLabel jl[], jl1, jl2, jl3;
+    JButton[] jb = new JButton[3];
+    JTextField[] jt1, jt2;
+    JLabel[] jl;
+    JLabel jl1;
+    JLabel jl2;
+    JLabel jl3;
     JPanel jp, jp1;
     Container con;
-    int k, p;
-    String str[] = {
+    int k;
+    String[] str = {
             "SUBMIT",
             "RESET",
             "EXIT"
     };
-    String str1[] = {
+    String[] str1 = {
             "Proses",
             "Arrival Time",
             "Burst Time",
             "Waiting Time",
             "Finish Time",
             "Turn Around Time",
-            "Total Turn Around Time"
+            " Gantt Chart"
     };
 
     public fcfs() {
@@ -76,10 +79,10 @@ class fcfs extends JFrame implements ActionListener {
     } //end of constructor
 
     public void actionPerformed(ActionEvent ae) {
-        int FT[] = new int[k];
-        int WT[] = new int[k];
-        int TAT[] = new int[k];
-        float NTAT[] = new float[k];
+        int[] FT = new int[k];
+        int[] WT = new int[k];
+        int[] TAT = new int[k];
+        int[] pid = new int[k];
         float sum = 0;
         float avg;
         JPanel main = new JPanel();
@@ -108,12 +111,13 @@ class fcfs extends JFrame implements ActionListener {
                         WT[i] = FT[i - 1] - Integer.parseInt(jt1[i].getText());
                     }
 
+                pid[i] = i + 1;
+
                 }
                 TAT[i] = WT[i] + Integer.parseInt(jt2[i].getText());
-                NTAT[i] = TAT[i] / (Integer.parseInt(jt2[i].getText()));
                 sum = sum + WT[i];
 
-            } //end for loop
+            }
 
 
             for (int i = 0; i < 7; i++) {
@@ -121,33 +125,33 @@ class fcfs extends JFrame implements ActionListener {
             }
             for (int i = 0; i < k; i++) {
                 jp.add(new JLabel("proses" + (i + 1)));
-                jp.add(new JLabel("   " + Integer.parseInt(jt1[i].getText())));
-                jp.add(new JLabel("" + Integer.parseInt(jt2[i].getText())));
-                jp.add(new JLabel("" + WT[i]));
-                jp.add(new JLabel("" + FT[i]));
-                jp.add(new JLabel("" + TAT[i]));
-                jp.add(new JLabel("" + NTAT[i]));
-
+                jp.add(new JLabel("   " + Integer.parseInt(jt1[i].getText()) + " ms"));
+                jp.add(new JLabel("" + Integer.parseInt(jt2[i].getText()) + " ms"));
+                jp.add(new JLabel("" + WT[i] + " ms"));
+                jp.add(new JLabel("" + FT[i] + " ms"));
+                jp.add(new JLabel("" + TAT[i] + " ms"));
+                jp.add(new JLabel("" + "P" + pid[i]));
             }
-            avg = sum / k;
-            String str2 = "Average Waiting Time = " + avg;
-            jp1.add(new JLabel(str2));
-            main.add(jp, BorderLayout.NORTH);
-            main.add(jp1, BorderLayout.SOUTH);
 
             int sumTAT = 0;
-            for (int i = 0; i < TAT.length; i++) {
-                sumTAT = sumTAT + TAT[i];
+            for (int j : TAT) {
+                sumTAT = sumTAT + j;
             }
 
             int avTAT = sumTAT / TAT.length;
 
-            String str3 = "Average Turn Around Time= " + avTAT;
+            avg = sum / k;
+            String str2 = "Average Waiting Time = " + avg + " ms";
+            jp1.add(new JLabel(str2));
+            main.add(jp, BorderLayout.NORTH);
+            main.add(jp1, BorderLayout.SOUTH);
+
+            String str3 = "Average Turn Around Time = " + avTAT + " ms";
             jp1.add(new JLabel(str3));
             main.add(jp, BorderLayout.NORTH);
             main.add(jp1, BorderLayout.SOUTH);
 
-            JOptionPane.showMessageDialog(null, main, "output", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, main, "Hasil", JOptionPane.PLAIN_MESSAGE);
 
         } else if (ae.getSource() == jb[1]) {
             setVisible(false);
