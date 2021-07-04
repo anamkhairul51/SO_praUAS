@@ -3,10 +3,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-/*
-Author : Muhammad Khairul Anam
-NIM    : A11.2019.11712
-Kelas  : A11.4415
+/**
+ * Author : Muhammad Khairul Anam
+ * NIM    : A11.2019.11712
+ * Kelas  : A11.4415
  */
 
 class fcfs extends JFrame implements ActionListener {
@@ -35,7 +35,7 @@ class fcfs extends JFrame implements ActionListener {
     };
 
     public fcfs() {
-        super("Algoritma Penjadwalan FIFO");
+        super("Algoritma Penjadwalan FIFO (Author : A11.2019.11712)");
         con = getContentPane();
 
         k = Integer.parseInt(JOptionPane.showInputDialog("Masukkan banyaknya proses"));
@@ -151,7 +151,7 @@ class fcfs extends JFrame implements ActionListener {
             main.add(jp, BorderLayout.NORTH);
             main.add(jp1, BorderLayout.SOUTH);
 
-            JOptionPane.showMessageDialog(null, main, "Hasil", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, main, "Hasil (Author : A11.2019.11712) ", JOptionPane.PLAIN_MESSAGE);
 
         } else if (ae.getSource() == jb[1]) {
             setVisible(false);
